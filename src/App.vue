@@ -4,7 +4,7 @@
     <div class="container__all">
       <div class="row">
         <div class="col-lg-9">
-          <div class="card map__card">
+          <div class="card map__card mb-2">
             <div class="card-header">
               Countries Affected
             </div>
