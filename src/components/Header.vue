@@ -60,7 +60,7 @@ export default {
     name: 'Home',
     data(){
         return {
-            country: '',
+            country: 'Worldwide',
             confirmed: '',
             deaths: '',
             recovered: '',
@@ -73,13 +73,33 @@ export default {
     },
     methods: {
         async GetCovidCases(value){
-            const url = this.country == '' ? 'https://disease.sh/v3/covid-19/all' :
+
+            const url = value == 'Worldwide' ? 'https://disease.sh/v3/covid-19/all' :
                         'https://disease.sh/v3/covid-19/countries/'+value+'';
 
             await axios.get(url)
             .then(res => {
                 // console.log(res.data)
-                this.country = this.country == ''? 'Worldwide' : res.data.country;
+                value == 'Worldwide' ? this.country = 'Worldwide' : this.country = res.data.country;
+                this.country == 'Worldwide' ? this.country = 'Worldwide' : this.country = res.data.country;
+                this.confirmed = res.data.cases.toLocaleString();
+                this.deaths = res.data.deaths.toLocaleString();
+                this.recovered = res.data.recovered.toLocaleString();
+                this.active = res.data.active.toLocaleString();
+
+                this.lastUpdated = new Date(res.data.updated);
+            })
+            .catch(error => {
+                return Promise.reject(error);
+            });
+        },
+        async GetAllCovidCases(){
+
+            const url = 'https://disease.sh/v3/covid-19/all'
+
+            await axios.get(url)
+            .then(res => {
+                this.country == res.data.country;
                 this.confirmed = res.data.cases.toLocaleString();
                 this.deaths = res.data.deaths.toLocaleString();
                 this.recovered = res.data.recovered.toLocaleString();
@@ -97,7 +117,7 @@ export default {
         }
     },
     mounted() {
-        this.GetCovidCases();
+        this.GetAllCovidCases();
         
         fetch('https://disease.sh/v3/covid-19/countries')
             .then((response) => response.json())
@@ -109,7 +129,7 @@ export default {
             })
             .catch(error => {
                 return Promise.reject(error);
-            });
+        });
     }
 };
 </script>
