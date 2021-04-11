@@ -40,8 +40,6 @@
                         '<img class="img-fluid" src="'+country.value.flag+'">'+'<p class="font-weight-bold">'+country.name+'</p>'+'<p>Cases: '+country.status.cases.toLocaleString()+'</p>'+'<p>Recovered: '+country.status.recovered.toLocaleString()+'</p>'+'<p>Deaths: '+country.status.deaths.toLocaleString()+'</p>'
                     )
                 });
-
-                
             })
             .catch(error => {
                 return Promise.reject(error);
