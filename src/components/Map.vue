@@ -31,9 +31,6 @@
                     value: country.countryInfo,
                     status: country
                 }))
-
-                
-
                 countries.map((country) => {
                     let circle = L.circle([country.value.lat,  country.value.long], {radius: ''+Math.sqrt(country.status.cases)*400+'', color: '#DA210E'}).addTo(mapDiv)
                     circle.bindPopup(
