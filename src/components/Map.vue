@@ -12,15 +12,16 @@
 
     export default {
         name: 'Map',
-        mounted(){
-            const mapDiv = L.map("mapContainer").setView([0, 0], 2);
+        methods: {
+            viewMap(){
+                const mapDiv = L.map("mapContainer", {zoom: 10, minZoom: 0}).setView([12.567564940265195, 123.2030846819095], 4);
             L.tileLayer(
             "https://api.maptiler.com/maps/toner/{z}/{x}/{y}.png?key=a6U4uTHrCxiCmtUvyHF2",
             {
                 attribution:
                 '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
                 noWrap: true,
-            }
+            } 
             ).addTo(mapDiv);
         
         fetch('https://disease.sh/v3/covid-19/countries')
@@ -41,6 +42,10 @@
             .catch(error => {
                 return Promise.reject(error);
             });
+            }
+        },
+        mounted(){
+            this.viewMap()
         }
     }
 </script>
