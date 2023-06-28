@@ -64,7 +64,7 @@ onMounted(async () => {
         <div class="main">
             <div class="text-white container__all">
                 <p class="country-title">{{ country }}</p>
-                <p><span>Last Updated awdawd {{ lastUpdated }}</span></p>
+                <p><span>Last Updated {{ lastUpdated }}</span></p>
                 <select class="custom-select w-auto" @change="onChangeCountry($event)">
                     <option value="Worldwide" selected>Worldwide</option>
                     <option v-for="country in selectCountry" :key="country.country" :value="country.country">{{
